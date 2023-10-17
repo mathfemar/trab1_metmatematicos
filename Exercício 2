@@ -1,1 +1,120 @@
+# ITEM A
 
+import sympy as sp
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Definição da variável "x"
+x = sp.symbols('x')
+
+# Definição da função f(x)
+f_x = sp.sqrt(x)
+a = 9 # Ponto de expansão
+
+# Cálculo das derivadas de f(x)
+derivada1f = sp.diff(f_x,x)
+derivada2f = sp.diff(derivada1f,x)
+derivada3f = sp.diff(derivada2f,x)
+derivada4f = sp.diff(derivada3f,x)
+
+# Cálculo do polinômio de Taylor de grau 1
+
+polinomio1_taylor = (f_x.subs(x,a) +
+                    (derivada1f.subs(x,a) / sp.factorial(1)) * (x-a))
+
+# Exibição do polinômio de Taylor obtido
+print("P(x) =", polinomio1_taylor)
+
+# Plotagem do gráfico do Polinômio de Taylor de grau 2 vs. Função Original
+taylor_func = sp.lambdify(x, polinomio2_taylor, "numpy")
+x_values = np.linspace(0, 18, 400)
+y_values = taylor_func(x_values)
+f_func = sp.lambdify(x, f_x, "numpy")
+original_values = f_func(x_values)
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y_values, label="Polinômio de Taylor (Grau 2)", color='blue')
+plt.plot(x_values, original_values, label="Função Original f(x)", linestyle='--', color='red')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid()
+plt.title("Polinômio de Taylor de grau 2 vs. Função Original")
+plt.show()
+
+# Cálculo do polinômio de Taylor de grau 2
+
+polinomio2_taylor = (f_x.subs(x,a) +
+                    (derivada1f.subs(x,a) / sp.factorial(1)) * (x-a) +
+                    (derivada2f.subs(x,a) / sp.factorial(2)) * (x-a)**2)
+
+# Exibição do polinômio de Taylor obtido
+print("P(x) =", polinomio2_taylor)
+
+# Plotagem do gráfico do Polinômio de Taylor de grau 2 vs. Função Original
+taylor_func = sp.lambdify(x, polinomio2_taylor, "numpy")
+x_values = np.linspace(0, 18, 400)
+y_values = taylor_func(x_values)
+f_func = sp.lambdify(x, f_x, "numpy")
+original_values = f_func(x_values)
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y_values, label="Polinômio de Taylor (Grau 2)", color='blue')
+plt.plot(x_values, original_values, label="Função Original f(x)", linestyle='--', color='red')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid()
+plt.title("Polinômio de Taylor de grau 2 vs. Função Original")
+plt.show()
+
+# Cálculo do polinômio de Taylor de grau 3
+
+polinomio3_taylor = (f_x.subs(x,a) +
+                    (derivada1f.subs(x,a) / sp.factorial(1)) * (x-a) +
+                    (derivada2f.subs(x,a) / sp.factorial(2)) * (x-a)**2 +
+                    (derivada3f.subs(x,a) / sp.factorial(3)) * (x-a)**3)
+
+# Exibição do polinômio de Taylor obtido
+print("P(x) =", polinomio3_taylor)
+
+# Plotagem do gráfico do Polinômio de Taylor de grau 3 vs. Função Original
+taylor_func = sp.lambdify(x, polinomio3_taylor, "numpy")
+x_values = np.linspace(0, 18, 400)
+y_values = taylor_func(x_values)
+f_func = sp.lambdify(x, f_x, "numpy")
+original_values = f_func(x_values)
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y_values, label="Polinômio de Taylor (Grau 3)", color='blue')
+plt.plot(x_values, original_values, label="Função Original f(x)", linestyle='--', color='red')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid()
+plt.title("Polinômio de Taylor de grau 3 vs. Função Original")
+plt.show()
+
+# Cálculo do polinômio de Taylor de grau 4
+
+polinomio4_taylor = (f_x.subs(x,a) +
+                    (derivada1f.subs(x,a) / sp.factorial(1)) * (x-a) +
+                    (derivada2f.subs(x,a) / sp.factorial(2)) * (x-a)**2 +
+                    (derivada3f.subs(x,a) / sp.factorial(3)) * (x-a)**3 +
+                    (derivada4f.subs(x,a) / sp.factorial(4)) * (x-a)**4)
+
+# Exibição do polinômio de Taylor obtido
+print("P(x) =", polinomio4_taylor)
+
+# Plotagem do gráfico do Polinômio de Taylor de grau 4 vs. Função Original
+taylor_func = sp.lambdify(x, polinomio4_taylor, "numpy")
+x_values = np.linspace(0, 18, 400)
+y_values = taylor_func(x_values)
+f_func = sp.lambdify(x, f_x, "numpy")
+original_values = f_func(x_values)
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y_values, label="Polinômio de Taylor (Grau 4)", color='blue')
+plt.plot(x_values, original_values, label="Função Original f(x)", linestyle='--', color='red')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid()
+plt.title("Polinômio de Taylor de grau 4 vs. Função Original")
+plt.show()
