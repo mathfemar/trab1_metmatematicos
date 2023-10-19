@@ -1,1 +1,142 @@
+import math
+import numpy as np
+import matplotlib.pyplot as plt
 
+def is_absolutely_convergent(series):
+  """
+  Verifica se a série matemática é absolutamente convergente.
+
+  Args:
+    series: Uma função que retorna o valor do termo n da série.
+
+  Returns:
+    True se a série é absolutamente convergente, False caso contrário.
+  """
+
+  # Testa se a razão entre dois termos consecutivos da série é sempre menor que 1.
+  for n in range(1, 100):
+    if abs(series(n)) >= 1:
+      return False
+
+  # A série é absolutamente convergente.
+  return True
+
+
+def is_conditionally_convergent(series):
+  """
+  Verifica se a série matemática é condicionalmente convergente.
+
+  Args:
+    series: Uma função que retorna o valor do termo n da série.
+
+  Returns:
+    True se a série é condicionalmente convergente, False caso contrário.
+  """
+
+  # Testa se a razão entre dois termos consecutivos da série converge para 0.
+  for n in range(1, 100):
+    if abs(series(n+1) / series(n)) > 1:
+      return False
+
+  # A série é condicionalmente convergente.
+  return True
+
+
+def is_divergent(series):
+  """
+  Verifica se a série matemática é divergente.
+
+  Args:
+    series: Uma função que retorna o valor do termo n da série.
+
+  Returns:
+    True se a série é divergente, False caso contrário.
+  """
+
+  # Testa se a série é absolutamente convergente ou condicionalmente convergente.
+
+  return not is_absolutely_convergent(series) and not is_conditionally_convergent(series)
+
+def sum_partial_series(series, n_max):
+  """
+  Calcula a soma parcial de uma série matemática.
+
+  Args:
+    series: Uma função que retorna o valor do termo n da série.
+    n_max: O número máximo de termos da série a serem somados.
+
+  Returns:
+    A soma parcial da série.
+  """
+
+  # Obtém as somas parciais.
+  partial_sums = []
+  for n in range(n_max + 1):
+    partial_sums.append(series(n))
+
+  # Retorna a soma parcial.
+  return sum(partial_sums)
+
+def plot_partial_sums(series, n_max):
+  """
+  Plota o gráfico das somas parciais da série matemática.
+
+  Args:
+    series: Uma função que retorna um número.
+    n_max: O número máximo de termos da série a serem plotados.
+
+  Returns:
+    O gráfico das somas parciais da série.
+  """
+
+  # Obtém as somas parciais.
+  partial_sums_list = []
+  for n in range(n_max + 1):
+    partial_sums_list.append(series(n))
+  print(f'{partial_sums}')
+
+  # Plota o gráfico.
+  plt.plot(range(n_max + 1), partial_sums_list)
+  plt.xlabel("Número de termos")
+  plt.ylabel("Soma parcial")
+  plt.show()
+
+  #Testa se a primeira posição é um inteiro ou não
+  try:
+    print(f'Soma parcial: {sum(partial_sums_list)}')
+  except:
+    print(f'Soma parcial: {sum(partial_sums_list[1:])}')
+
+
+def main():
+  # -------INSIRA AQUI A ENTRADA DA SÉRIE MATEMÁTICA!-------
+  def series(n):
+    try:
+      return (5*n+2)/n**3
+    except:
+      if n == 0:
+        pass
+      else:
+        return (5*n+2)/n**3
+
+  # Testa se a série é absolutamente convergente.
+  if is_absolutely_convergent(series) == True:
+    print("A série é absolutamente convergente.")
+
+  # Testa se a série é condicionalmente convergente.
+  if is_conditionally_convergent(series) == True:
+    print("A série é condicionalmente convergente.")
+
+  # Testa se a série é divergente.
+  if is_divergent(series):
+    print("A série é divergente.\nSoma parcial infinita.")
+
+  # Define o n_max.
+  n_max = 100
+
+  # Plota o gráfico das somas parciais.
+  plot_partial_sums(series, n_max)
+
+
+if __name__ == "__main__":
+  main()
